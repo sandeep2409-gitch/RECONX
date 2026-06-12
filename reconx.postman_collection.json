@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "4e7275ad-a41e-450f-bc87-9bb3a62ea6fa",
+		"name": "ReconX Passive OSINT APIs",
+		"description": "Postman Collection for ReconX passive OSINT and network intelligence APIs. Includes DNS resolvers, WHOIS/RDAP lookups, SSL logs, subdomain enumeration, and IP geolocation.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DNS Resolution",
+			"item": [
+				{
+					"name": "Resolve A Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dns.google/resolve?name={{domain}}&type=A",
+							"protocol": "https",
+							"host": [
+								"dns",
+								"google"
+							],
+							"path": [
+								"resolve"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{domain}}",
+									"description": "Target domain name"
+								},
+								{
+									"key": "type",
+									"value": "A",
+									"description": "DNS record type (A, AAAA, MX, TXT, CNAME, etc.)"
+								}
+							]
+						},
+						"description": "Resolves IPv4 (A) records of the target domain using the secure Google Public DNS JSON API."
+					},
+					"response": []
+				},
+				{
+					"name": "Resolve MX Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dns.google/resolve?name={{domain}}&type=MX",
+							"protocol": "https",
+							"host": [
+								"dns",
+								"google"
+							],
+							"path": [
+								"resolve"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{domain}}"
+								},
+								{
+									"key": "type",
+									"value": "MX"
+								}
+							]
+						},
+						"description": "Resolves Mail Exchanger (MX) routing records of the target domain using Google Public DNS."
+					},
+					"response": []
+				},
+				{
+					"name": "Resolve TXT Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://dns.google/resolve?name={{domain}}&type=TXT",
+							"protocol": "https",
+							"host": [
+								"dns",
+								"google"
+							],
+							"path": [
+								"resolve"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{domain}}"
+								},
+								{
+									"key": "type",
+									"value": "TXT"
+								}
+							]
+						},
+						"description": "Resolves Text (TXT) validation records (often containing SPF, DKIM, and site validation data) using Google Public DNS."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registry & WHOIS",
+			"item": [
+				{
+					"name": "RDAP Domain Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rdap.org/domain/{{domain}}",
+							"protocol": "https",
+							"host": [
+								"rdap",
+								"org"
+							],
+							"path": [
+								"domain",
+								"{{domain}}"
+							]
+						},
+						"description": "Queries the Registration Data Access Protocol (RDAP) redirection server to fetch registry ownership details, timestamps (creation, expiration), and registrar info."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SSL & Subdomains",
+			"item": [
+				{
+					"name": "SSL Certificate Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://crt.sh/?q={{domain}}&output=json",
+							"protocol": "https",
+							"host": [
+								"crt",
+								"sh"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "{{domain}}",
+									"description": "Target domain"
+								},
+								{
+									"key": "output",
+									"value": "json",
+									"description": "Request JSON output instead of HTML"
+								}
+							]
+						},
+						"description": "Queries crt.sh Certificate Transparency logs to fetch active and historical SSL/TLS certificates issued to the target domain."
+					},
+					"response": []
+				},
+				{
+					"name": "Subdomain Enumeration",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://crt.sh/?q=%.{{domain}}&output=json",
+							"protocol": "https",
+							"host": [
+								"crt",
+								"sh"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "%.{{domain}}",
+									"description": "Wildcard match for subdomains"
+								},
+								{
+									"key": "output",
+									"value": "json"
+								}
+							]
+						},
+						"description": "Queries crt.sh using a SQL wildcard search to passively map and identify registered subdomains."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Network & IP Intelligence",
+			"item": [
+				{
+					"name": "IP Geolocation & ASN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ipapi.co/{{ip}}/json/",
+							"protocol": "https",
+							"host": [
+								"ipapi",
+								"co"
+							],
+							"path": [
+								"{{ip}}",
+								"json",
+								""
+							]
+						},
+						"description": "Queries ipapi.co to obtain geographical coordinates, country codes, ISP details, and Autonomous System Numbers (ASN) mapping for a specific IP address."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HTTP Headers Audit",
+			"item": [
+				{
+					"name": "Response Headers Wrapper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.allorigins.win/get?url=https://{{domain}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"allorigins",
+								"win"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://{{domain}}",
+									"description": "The target website endpoint"
+								}
+							]
+						},
+						"description": "Queries a target website via the Allorigins proxy wrapper, which returns HTTP response headers to evaluate HSTS, CSP, and secure framing parameters."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "github.com",
+			"type": "string"
+			"description": "Target domain for passive diagnostics"
+		},
+		{
+			"key": "ip",
+			"value": "140.82.121.4",
+			"type": "string"
+			"description": "Resolved target IP to run ASN/Geo lookup"
+		}
+	]
+}

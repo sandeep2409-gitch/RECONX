@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------
+ * Theme Definitions (Matrix Green Theme Settings Only)
+ * ------------------------------------------------------------- */
+:root {
+  --accent: #39ff14;
+  --accent-rgb: 57, 255, 20;
+  --accent-dim: rgba(57, 255, 20, 0.1);
+  --accent-glow: rgba(57, 255, 20, 0.35);
+  --cyber-bg: #020604;
+  --cyber-card: rgba(4, 15, 8, 0.55);
+  --grid-color: rgba(57, 255, 20, 0.02);
+}
+
+/* -------------------------------------------------------------
+ * Tailwind v4 Theme Mappings
+ * ------------------------------------------------------------- */
+@theme {
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-cyber-bg: var(--cyber-bg);
+  --color-cyber-card: var(--cyber-card);
+  --color-neon-accent: var(--accent);
+  --color-neon-accent-dim: var(--accent-dim);
+  --color-neon-accent-glow: var(--accent-glow);
+}
+
+/* -------------------------------------------------------------
+ * Custom Styles & Scrollbars
+ * ------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: 3px;
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-glow);
+}
+
+/* Body base layout */
+body {
+  background-color: var(--cyber-bg);
+  color: #f8fafc;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Scanner HUD Grid */
+.hacker-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+/* Scanline animation overlay */
+.scanline {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(var(--accent-rgb), 0.015) 50%,
+    rgba(var(--accent-rgb), 0.015)
+  );
+  background-size: 100% 4px;
+}
+
+/* Blinking terminal cursor */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Dynamic glow effects */
+.glow-accent {
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
+}
+
+.border-glow-accent {
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+.border-glow-accent:hover {
+  box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.15);
+  border-color: rgba(var(--accent-rgb), 0.45);
+}
+
+/* Cyber card design system panels */
+.cyber-panel {
+  position: relative;
+  background: var(--cyber-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(var(--accent-rgb), 0.15);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-panel:hover {
+  border-color: rgba(var(--accent-rgb), 0.35);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.08);
+}
+
+/* Cyber card absolute corner markers */
+.cyber-corner-tl {
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 8px; height: 8px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+.cyber-corner-tr {
+  position: absolute;
+  top: -1px; right: -1px;
+  width: 8px; height: 8px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+.cyber-corner-bl {
+  position: absolute;
+  bottom: -1px; left: -1px;
+  width: 8px; height: 8px;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  pointer-events: none;
+}
+.cyber-corner-br {
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 8px; height: 8px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  pointer-events: none;
+}
+
+/* Scanning bar animation */
+@keyframes scanning {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.scan-bar {
+  animation: scanning 3.5s linear infinite;
+}
+
+/* CRT monitor curved glass look overlay */
+.crt-overlay::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 9999;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 85, 0.5),
+      -0.025em -0.05em 0 rgba(0, 240, 255, 0.5),
+      0.025em 0.05em 0 rgba(255, 170, 0, 0.5);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 85, 0.5),
+      -0.025em -0.05em 0 rgba(0, 240, 255, 0.5),
+      0.025em 0.05em 0 rgba(255, 170, 0, 0.5);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 85, 0.5),
+      0.025em 0.025em 0 rgba(0, 240, 255, 0.5),
+      -0.05em -0.05em 0 rgba(255, 170, 0, 0.5);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 85, 0.5),
+      0.025em 0.025em 0 rgba(0, 240, 255, 0.5),
+      -0.05em -0.05em 0 rgba(255, 170, 0, 0.5);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 85, 0.5),
+      0.05em 0.025em 0 rgba(0, 240, 255, 0.5),
+      0.05em -0.025em 0 rgba(255, 170, 0, 0.5);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 85, 0.5),
+      0.05em 0.025em 0 rgba(0, 240, 255, 0.5),
+      0.05em -0.025em 0 rgba(255, 170, 0, 0.5);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 85, 0.5),
+      -0.025em -0.025em 0 rgba(0, 240, 255, 0.5),
+      -0.025em -0.05em 0 rgba(255, 170, 0, 0.5);
+  }
+}
+.cyber-glitch:hover {
+  animation: glitch 400ms infinite;
+}
