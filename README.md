@@ -78,4 +78,3 @@ We have included a pre-configured Postman Collection file in the root directory:
 ReconX operates strictly as a passive aggregator. It retrieves metrics directly from browser-allowed endpoints or proxies them through its own server-side backend routing. 
 
 Because it makes **zero direct connections** to the target host during auditing, it is completely anonymous, safe, and complies with ethical scanning standards.
-# RECONX
