@@ -1,4 +1,4 @@
-# 🔐 ReconX — Passive Recon Next.js Dashboard
+# 🔐 ReconX — Passive Recon  Dashboard
 
 ReconX is a modern browser-based OSINT & passive reconnaissance tool designed for security researchers, bug bounty hunters, and developers who want quick, domain intelligence—all served from a high-fidelity, hacker-themed Next.js dashboard.
 
