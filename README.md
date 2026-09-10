@@ -1,80 +1,123 @@
-# 🔐 ReconX — Passive Recon  Dashboard
+# ⚡ MR.CYPHER AI — Premium Local Coding AI Workstation
 
-ReconX is a modern browser-based OSINT & passive reconnaissance tool designed for security researchers, bug bounty hunters, and developers who want quick, domain intelligence—all served from a high-fidelity, hacker-themed Next.js dashboard.
-
-Everything is **100% passive**—no active port scans, no direct pings, and no legal grey areas. It queries public logs and registries to harvest intelligence cleanly and safely.
-
----
-
-## 🌍 Key Diagnostic Features
-
-- **WHOIS & Registry Intelligence** — Registrar details, creation dates, expiration dates, and authoritative nameservers via RDAP bootstrap redirection.
-- **DNS Record Resolver** — Full query resolution of `A`, `AAAA`, `MX`, `TXT`, `CNAME`, `NS`, and `SOA` records using the secure Google Public DNS JSON API.
-- **SSL Certificate Security** — Certificate Authority issuer details, validity timeframes, and status validation indicators.
-- **Subdomain Enumeration** — Extraction of child domains using historical records from Certificate Transparency logs (`crt.sh`).
-- **IP & ASN Intelligence** — Resolved domain IP metadata, network provider ASN, ISP name, and geological flags/coordinates via `ipapi.co`.
-- **HTTP Security Headers Audit** — PASS/FAIL compliance checklists scanning for HSTS, CSP, X-Frame-Options, MIME sniffing blockers, and referrer policy safety.
+> **Your Code. Your Machine. Your AI.**  
+> High-performance, dark-first local AI coding assistant web application powered by Ollama.
 
 ---
 
-## 🚀 Architectural Improvements (Next.js App Router)
+## 🎯 Overview
 
-- **Local API Proxy Router (`/api/proxy`)** — Server-side route handler at `src/app/api/proxy/route.js`. The client resolves domains by querying `/api/proxy?url=...` which fetches metrics (like `crt.sh` logs and `rdap.org` registration data) server-side, bypassing browser CORS blocks natively without relying on slow or rate-limited third-party proxies.
-- **Font Optimization** — Custom font sets (**Outfit** and **JetBrains Mono**) are loaded natively via Next.js `next/font/google` to optimize LCP and layout stability.
-- **SEO Ready** — Configured search headers, titles, descriptions, and icon bindings using Next.js Metadata objects.
+**MR.CYPHER AI** is a production-quality, developer-focused local AI coding workstation. It combines the sleek productivity of modern AI tools (Cursor, Raycast, Linear) with a futuristic cybersecurity workstation aesthetic—running **100% offline** on your machine with zero cloud latency and total privacy.
 
 ---
 
-## 💻 Tech Stack
+## ✨ Features
 
-- **Framework:** Next.js (App Router, Client & Server Components, Route Handlers)
-- **React version:** React 19
-- **Styling:** Tailwind CSS v4 (built-in Next.js template)
-- **Animations:** Framer Motion (staggered card transitions and scrolling console sweep animations)
-- **Icons:** Lucide React
-- **APIs Used:** `dns.google`, `rdap.org`, `crt.sh`, `ipapi.co`
+- 🔒 **100% Private & Local**: Powered by local [Ollama](https://ollama.com) models. Your source code never leaves your machine.
+- 📁 **Drag & Drop File Context**: Drag and drop any code files (`.py`, `.js`, `.ts`, `.json`, `.sql`, `.html`, `.css`, `.md`, etc.) directly into the workspace for instant offline AI analysis.
+- 🧠 **Default `mr-cypher` Model**: Pre-configured to default to the `mr-cypher` model with support for dynamic local Ollama model switching (`Qwen2.5-Coder`, `Llama 3.2`, `DeepSeek-Coder`).
+- 🎨 **Vibrant IDE Syntax Highlighting**: Custom VS Code / One Dark Prism token theme (Purple keywords, Blue functions, Emerald strings, Amber numbers, Sky Blue operators).
+- ⚡ **Interactive Slash Commands**: Type `/` to trigger instant commands (`/explain`, `/debug`, `/refactor`, `/review`, `/test`, `/document`).
+- 🖥️ **3-Zone Developer Layout**:
+  - **Left Sidebar**: Workspace navigation (`+ New Chat`, `Search`, `Projects`, `Recent Chats`, `Favorites`, Ollama status).
+  - **Main Chat Area**: Streamed AI responses, IDE code blocks with `✓ Copied` feedback, line numbers, and action toolbars (Copy, Regenerate, Edit, Continue).
+  - **Right Context Panel**: 3 tabs (`CONTEXT`, `FILES`, `ACTIVITY`) displaying model specs, attached project context files, and live streaming metrics.
+- ⌨️ **Keyboard Shortcuts**:
+  - `Cmd / Ctrl + K` — Global conversation search modal
+  - `Cmd / Ctrl + N` — Create new chat
+  - `Esc` — Stop generation / Close modals
 
 ---
 
-## 💻 Getting Started
+## 🚀 Getting Started
 
 ### 1. Prerequisites
-Ensure you have **Node.js** (v18 or higher) and **npm** installed.
 
-### 2. Installation
-Install all required Node modules:
+- **Node.js**: v18+ installed on your system.
+- **Ollama**: Installed and running locally on `http://localhost:11434`.
+
+### 2. Prepare the `mr-cypher` Model
+
+To use or create the default `mr-cypher` model with Ollama:
+
 ```bash
-npm install
+# Pull a recommended base coder model
+ollama pull qwen2.5-coder:3b
+
+# Optional: Create custom mr-cypher model from Modelfile
+ollama create mr-cypher -f Modelfile
 ```
 
-### 3. Start Development Server
-Spin up the Next.js development server:
+### 3. Installation & Setup
+
+Clone or open the repository and install dependencies:
+
 ```bash
+# Install dependencies
+npm install
+
+# Start the local development server
 npm run dev
 ```
-Open **[http://localhost:3000/](http://localhost:3000/)** in your web browser.
 
-### 4. Build for Production
-Verify production build compilation and static site generation:
+Open `http://localhost:5173` in your browser to launch **MR.CYPHER AI**.
+
+---
+
+## 📦 Building for Production
+
+To create an optimized production build:
+
 ```bash
 npm run build
 ```
 
----
-
-## 🧪 Postman Collection Testing
-We have included a pre-configured Postman Collection file in the root directory:
-- [reconx.postman_collection.json](file:///Users/pandu/Desktop/RECON%20X/reconx.postman_collection.json)
-
-**How to use:**
-1. Open Postman.
-2. Click **Import** and select the `reconx.postman_collection.json` file.
-3. The collection provides pre-configured folders containing GET requests for DNS resolution, WHOIS/RDAP bootstrap, SSL cert details, subdomains enumeration, IP/ASN routing, and HTTP headers check.
-4. Modify the collection variables `domain` (e.g. `github.com`) and `ip` (e.g. `140.82.121.4`) to test different endpoints.
+The output bundle will be generated inside the `dist/` directory.
 
 ---
 
-## 🔒 Passive OSINT Compliance
-ReconX operates strictly as a passive aggregator. It retrieves metrics directly from browser-allowed endpoints or proxies them through its own server-side backend routing. 
+## 📂 Project Structure
 
-Because it makes **zero direct connections** to the target host during auditing, it is completely anonymous, safe, and complies with ethical scanning standards.
+```
+Project Expo/
+├── public/
+│   └── logo.jpg               # Official MR.CYPHER AI Hooded Logo Graphic
+├── src/
+│   ├── components/            # UI Components (Header, Sidebar, EmptyState, ChatInput, etc.)
+│   │   ├── Header.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── ChatInput.tsx
+│   │   ├── ChatMessage.tsx
+│   │   ├── CodeBlock.tsx
+│   │   ├── RightContextPanel.tsx
+│   │   ├── SettingsModal.tsx
+│   │   ├── SetupScreen.tsx
+│   │   ├── SearchModal.tsx
+│   │   └── SlashCommandMenu.tsx
+│   ├── hooks/                 # Custom React Hooks (useChat, useOllama)
+│   ├── lib/                   # Native Ollama API client & offline fallback engine
+│   ├── types/                 # TypeScript data models
+│   ├── App.tsx                # Main App Router & Workspace Layout
+│   └── index.css              # Custom Tailwind CSS & Prism Syntax Highlighting
+├── package.json
+├── tailwind.config.js
+├── vite.config.ts
+└── README.md
+```
+
+---
+
+## 🛡️ Privacy Guarantee
+
+MR.CYPHER AI operates entirely on-device:
+- Zero external cloud telemetry or third-party API calls.
+- Dragged-and-dropped source files are read strictly in local browser memory via HTML5 `FileReader`.
+- Inference runs locally on your Apple Silicon / GPU hardware through Ollama.
+
+---
+
+## 📄 License
+
+MIT License. Designed for privacy-first developers.
+Push is done 
