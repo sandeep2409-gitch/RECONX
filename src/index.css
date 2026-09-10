@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-cy-bg: #0A0A0B;
+  --color-cy-secondary: #111113;
+  --color-cy-panel: #151518;
+  --color-cy-border: #27272A;
+  --color-cy-hover: #1F1F23;
+  --color-cy-active: #27272E;
+  
+  --color-cy-accent: #6366F1;
+  --color-cy-accent-hover: #4F46E5;
+  --color-cy-accent-glow: #7C3AED;
+  --color-cy-accent-light: #818CF8;
+  --color-cy-accent-subtle: rgba(99, 102, 241, 0.12);
+  --color-cy-accent-border: rgba(99, 102, 241, 0.3);
+
+  --color-cy-text-primary: #F4F4F5;
+  --color-cy-text-secondary: #A1A1AA;
+  --color-cy-text-muted: #71717A;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Fira Code, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0A0A0B;
+  color: #F4F4F5;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* Cybersecurity subtle grid background overlay */
+.cy-grid-bg {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(39, 39, 42, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 39, 42, 0.2) 1px, transparent 1px);
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 17, 19, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
+}
+
+/* Code block typography & container */
+pre code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   MR.CYPHER Vibrant IDE Prism Syntax Highlighting Theme (VS Code / One Dark)
+   ========================================================================== */
+
+/* Comments & Documentation */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #71717A !important;
+  font-style: italic;
+}
+
+/* Punctuation & Brackets */
+.token.punctuation {
+  color: #A1A1AA !important;
+}
+
+/* Keywords (def, return, async, await, class, import, from, const, let, function) */
+.token.keyword,
+.token.atrule,
+.token.rule {
+  color: #C084FC !important; /* Electric Purple / Violet */
+  font-weight: 600;
+}
+
+/* Functions & Methods */
+.token.function,
+.token.function-variable {
+  color: #60A5FA !important; /* Bright Blue */
+  font-weight: 500;
+}
+
+/* Strings & Characters */
+.token.string,
+.token.char,
+.token.attr-value {
+  color: #4ADE80 !important; /* Vibrant Emerald Green */
+}
+
+/* Numbers & Booleans */
+.token.number,
+.token.boolean {
+  color: #F59E0B !important; /* Amber / Orange */
+}
+
+/* Class Names, Types, Schemas */
+.token.class-name,
+.token.maybe-class-name,
+.token.type-annotation {
+  color: #FACC15 !important; /* Golden Yellow */
+  font-weight: 600;
+}
+
+/* Operators (=, +, -, *, /, ==, !=, =>) */
+.token.operator,
+.token.entity,
+.token.url {
+  color: #38BDF8 !important; /* Cyan / Sky Blue */
+}
+
+/* Decorators & Built-ins (@app.get, @BaseModel, len, print, list, dict) */
+.token.decorator,
+.token.builtin,
+.token.important {
+  color: #F472B6 !important; /* Hot Pink / Rose */
+}
+
+/* Properties & Keys */
+.token.property,
+.token.tag,
+.token.symbol {
+  color: #818CF8 !important; /* Soft Indigo */
+}
+
+/* Variables & Parameters */
+.token.variable,
+.token.parameter {
+  color: #F4F4F5 !important;
+}
+
+/* Regex & Special Symbols */
+.token.regex {
+  color: #FB7185 !important;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Focus styles for keyboard accessibility */
+:focus-visible {
+  outline: 2px solid #6366F1;
+  outline-offset: 2px;
+}
